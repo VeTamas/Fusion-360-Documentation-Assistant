@@ -63,6 +63,7 @@ utils/          # Token and cost calculation utilities
 data/           # Raw documentation files
 vectorstore/    # Persisted Chroma vector database
 logs/           # Application logs
+```
 
 ---
 
