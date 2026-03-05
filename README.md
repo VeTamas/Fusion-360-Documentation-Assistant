@@ -1,14 +1,22 @@
 # Fusion 360 Documentation Assistant
 
-This project implements a **domain-specific AI assistant** for Autodesk Fusion 360
-documentation using **advanced Retrieval-Augmented Generation (RAG)** and
-**controlled tool calling**.
+AI assistant for Autodesk Fusion 360 documentation using Retrieval-Augmented Generation.
 
-The goal of the application is to provide **grounded, context-aware answers**
-based on official documentation, while maintaining robustness through fallback
-mechanisms and observability.
+The system prioritizes tool-based answers and documentation retrieval before using LLM reasoning to reduce hallucinations.
 
 ---
+
+## System flow:
+
+User Question
+     │
+Tool Router
+     │
+Documentation Retrieval
+     │
+LLM Fallback
+     │
+Answer + Source
 
 ## Features
 
