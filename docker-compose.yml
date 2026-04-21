@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16
+    container_name: rag_postgres
+    environment:
+      POSTGRES_USER: raguser
+      POSTGRES_PASSWORD: ragpassword
+      POSTGRES_DB: ragdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raguser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: rag_app
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://raguser:ragpassword@db:5432/ragdb
+    volumes:
+      - ./app/rag/vectorstore:/app/app/rag/vectorstore
+    ports:
+      - "8501:8501"
+
+volumes:
+  postgres_data:
